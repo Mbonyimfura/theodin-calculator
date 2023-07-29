@@ -3,7 +3,7 @@ const buttons = document.querySelectorAll('button');
 let operand1 = '';
 let operand2 = '';
 let operator = '';
-
+const MAX_DIGITS=15;
 function clear() {
     operand1 = '';
     operand2 = '';
@@ -49,14 +49,17 @@ buttons.forEach(button => {
      
         if (!isNaN(parseFloat(value))) {
             if (!operator) {
-                if (operand1 === '0') {
+             if(operand1.length<MAX_DIGITS){
+                   if (operand1 === '0') {
                     operand1 = value;
                     display.value = value;
                 } else {
                     operand1 += value;
                     display.value += value;
                 }
-            } else {
+            } 
+             }else {
+            if(operand2.length<MAX_DIGITS){
                 if (operand2 === '0') {
                     operand2 = value;
                     display.value += value;
@@ -64,6 +67,7 @@ buttons.forEach(button => {
                     operand2 += value;
                     display.value += value;
                 }
+            }
             }
         } else if (value === '+' || value === '-' || value === 'x' || value === '/') {
             if (operand1 && !operand2) {
